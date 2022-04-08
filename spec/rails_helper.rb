@@ -63,11 +63,12 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 
-  ## Custom Config
+  # Custom Config
+
   # add `FactoryBot` methods
   config.include FactoryBot::Syntax::Methods
 
-  # Database cleaner
+  # Database Cleaner
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with(:truncation)
@@ -80,6 +81,7 @@ RSpec.configure do |config|
   end
 end
 
+# Shoulda Matchers to provide RSpec with the association and validation matchers.
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|
     with.test_framework :rspec
