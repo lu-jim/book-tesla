@@ -1,11 +1,9 @@
 class CreateBookings < ActiveRecord::Migration[7.0]
   def change
-    create_table :bookings do |t|
-      t.references :user, index: true, foreign_key: true
-      t.references :car, index: true, foreign_key: true
+    create_join_table :cars, :users, table_name: :bookings do |t|
+      t.index %i[car_id user_id]
+      t.index %i[user_id car_id]
       t.datetime :date
-
-      t.timestamps
     end
   end
 end
