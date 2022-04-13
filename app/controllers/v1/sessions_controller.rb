@@ -1,13 +1,23 @@
-class V1::SessionsController < ApplicationController
-  def create
-    user = User.where(email: params[:email]).first
+class Users::SessionsController < Devise::SessionsController
+  respond_to :json
 
-    if user&.valid_password?(params[:password])
-      render json: user.as_json(only: %i[id email], status: :created)
-    else
-      head(:unauthorized)
-    end
+  private
+
+  def respond_with(resource, _opts = {})
+    render json: { message: 'You are logged in.' }, status: :ok
   end
 
-  def destroy; end
+  def respond_to_on_destroy
+    log_out_success && return if current_user
+
+    log_out_failure
+  end
+
+  def log_out_success
+    render json: { message: "You are logged out." }, status: :ok
+  end
+
+  def log_out_failure
+    render json: { message: "Hmm nothing happened."}, status: :unauthorized
+  end
 end
