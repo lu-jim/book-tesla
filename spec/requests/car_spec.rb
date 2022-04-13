@@ -43,7 +43,7 @@ RSpec.describe 'Cars', type: :request do
       end
 
       it 'returns a not found message' do
-        expect(response.body).to match(/Couldn't find car/)
+        expect(JSON.parse(response.body)['message']).to match(/Couldn't find Car with 'id'=100/)
       end
     end
   end
