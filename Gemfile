@@ -38,8 +38,11 @@ gem 'rack-cors'
 
 # Other dependencies
 gem 'cancancan'
-gem 'devise'
 gem 'rubocop', '>= 1.0', '< 2.0'
+
+# Authentication and token authentication
+gem 'devise'
+gem 'devise-jwt'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

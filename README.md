@@ -2,6 +2,37 @@
 ![](https://img.shields.io/badge/Microverse-blueviolet) ![](https://img.shields.io/badge/Ruby-red) ![](https://img.shields.io/badge/Rails-critical)
 > API built with Rails where your users can create bookings for a given car:
 
+# API Endpoints
+
+http://localhost:8000/users/sign_in
+
+    Route ==> Sign in
+    Method ==> POST
+    Body ==> { "user": { "email": "test@example.com", "password": "12345678" } }
+    Response token ==> data.headers.authorization
+
+http://localhost:8000/users
+
+    Route ==> Sign up
+    Method ==> POST
+    Body ==> { "user": { "email": "test@example.com", "password": "12345678" } }
+    Response token ==> data.headers.authorization
+
+http://localhost:8000/member
+
+    Route ==> To know if user logged in?
+    Method ==> GET
+    headers ==> token: token you saved from log in or sign up user
+    Response ==> data.data.message=> 'yeppa you did it.'
+
+http://localhost:8000/users/sign_out
+
+    Route ==> To know if user logged in?
+    Method ==> DELETE
+    headers ==> token: token you saved from log in or sign up user
+    Response ==> data.data.message=> 'You are logged out.'
+
+
 ## Built With
 - Ruby
 - Rails

@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  devise_for :users,
+             controllers: {
+               sessions: 'users/sessions',
+               registrations: 'users/registrations'
+             }
   namespace :v1, defaults: { format: :json } do
     resources :cars
     resources :users
   end
-  # Defines the root path route ("/")
-  # root "articles#index"
+
+  get '/member-data', to: 'members#show'
 end
