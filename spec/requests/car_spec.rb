@@ -51,7 +51,7 @@ RSpec.describe 'Cars', type: :request do
   # Test suite for POST /cars
   describe 'POST /v1/cars' do
     # valid payload
-    let(:valid_attributes) { { model: 'Cybertruck', city: 'San Diego' } }
+    let(:valid_attributes) { { model: 'Cybertruck' } }
 
     context 'when the request is valid' do
       before { post '/v1/cars', params: valid_attributes }
@@ -66,7 +66,7 @@ RSpec.describe 'Cars', type: :request do
     end
 
     context 'when the request is invalid' do
-      before { post '/v1/cars', params: { city: 'Bermuda' } }
+      before { post '/v1/cars', params: { location: 'Bermuda' } }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
