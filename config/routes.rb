@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'bookings/index'
+  get 'bookings/show'
+  get 'bookings/create'
+  get 'bookings/destroy'
   devise_for :users,
              controllers: {
                sessions: 'users/sessions',
