@@ -4,6 +4,45 @@ info:
   title: API V1
   version: v1
 paths:
+  "/users/cancel":
+    get:
+      summary: cancel registration
+      responses:
+        '200':
+          description: successful
+  "/users/sign_up":
+    get:
+      summary: new registration
+      responses:
+        '200':
+          description: successful
+  "/users/edit":
+    get:
+      summary: edit registration
+      responses:
+        '200':
+          description: successful
+  "/users":
+    patch:
+      summary: update registration
+      responses:
+        '200':
+          description: successful
+    put:
+      summary: update registration
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: delete registration
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create registration
+      responses:
+        '200':
+          description: successful
   "/users/sign_in":
     get:
       summary: new session
@@ -25,4 +64,4 @@ servers:
 - url: https://{defaultHost}
   variables:
     defaultHost:
-      default: www.localhost:8000
+      default: www.example.com
