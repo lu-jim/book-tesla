@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  get 'bookings/index'
-  get 'bookings/show'
-  get 'bookings/create'
-  get 'bookings/destroy'
   devise_for :users,
              controllers: {
                sessions: 'users/sessions',
@@ -11,6 +7,7 @@ Rails.application.routes.draw do
   namespace :v1, defaults: { format: :json } do
     resources :cars
     resources :users
+    resources :bookings
   end
 
   get '/member-data', to: 'members#show'

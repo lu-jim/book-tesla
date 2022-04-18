@@ -1,4 +1,10 @@
-class BookingsController < ApplicationController
+class V1::BookingsController < ApplicationController
+  before_action :set_booking, only: %i[show update destroy]
+
+  def new
+    @booking = Booking.new
+  end
+
   def index
     @bookings = Booking.all
     json_response(@bookings)
@@ -31,7 +37,7 @@ class BookingsController < ApplicationController
 
   def booking_params
     # whitelist params
-    params.permit(:car_id, :booking_id, :image_link)
+    params.permit(:car_id, :user_id, :location, :date)
   end
 
   def set_booking
