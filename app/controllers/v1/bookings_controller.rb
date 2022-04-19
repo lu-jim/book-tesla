@@ -1,10 +1,6 @@
 class V1::BookingsController < ApplicationController
   before_action :set_booking, only: %i[show update destroy]
 
-  def new
-    @booking = Booking.new
-  end
-
   def index
     @bookings = Booking.all
     json_response(@bookings)
@@ -14,11 +10,6 @@ class V1::BookingsController < ApplicationController
   def create
     @booking = Booking.create!(booking_params)
     json_response(@booking, :created)
-  end
-
-  # GET /bookings/:id
-  def show
-    json_response(@booking)
   end
 
   # PUT /bookings/:id

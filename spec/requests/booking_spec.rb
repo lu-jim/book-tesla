@@ -21,26 +21,35 @@ RSpec.describe 'Bookings', type: :request do
     end
   end
 
-  context 'when the record exists' do
-    it 'returns the booking' do
-      expect(json).not_to be_empty
-      expect(json['id']).to eq(booking_id)
+  describe 'POST /v1/bookings' do
+    # valid payload
+    let(:valid_attributes) do
+      { user_id: user.id, car_id: car.id, location: 'Los Angeles', date: DateTime.new(2022, 9, 1, 12, 0) }
     end
 
-    it 'returns status code 200' do
-      expect(response).to have_http_status(200)
+    context 'when the request is valid' do
+      before { post '/v1/bookings', params: valid_attributes }
+
+      it 'creates a booking' do
+        expect(json['location']).to eq('Los Angeles')
+      end
+
+      it 'returns status code 201' do
+        expect(response).to have_http_status(201)
+      end
     end
-  end
 
-  context 'when the record does not exist' do
-    let(:booking_id) { 100 }
+    context 'when the request is invalid' do
+      before { post '/v1/bookings', params: { location: 'Bermuda' } }
 
-    it 'returns status code 404' do
-      expect(response).to have_http_status(404)
-    end
+      it 'returns status code 422' do
+        expect(response).to have_http_status(422)
+      end
 
-    it 'returns a not found message' do
-      expect(JSON.parse(response.body)['message']).to match(/Couldn't find Car with 'id'=100/)
+      it 'returns a validation failure message' do
+        expect(response.body)
+          .to match(/Validation failed: User must exist, Car must exist, Date can't be blank/)
+      end
     end
   end
 end
