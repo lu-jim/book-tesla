@@ -60,6 +60,40 @@ paths:
       responses:
         '200':
           description: successful
+  "/v1/bookings":
+    get:
+      summary: list bookings
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create booking
+      responses:
+        '200':
+          description: successful
+  "/v1/bookings/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    patch:
+      summary: update booking
+      responses:
+        '200':
+          description: successful
+    put:
+      summary: update booking
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: delete booking
+      responses:
+        '200':
+          description: successful
   "/v1/cars":
     get:
       summary: list cars
@@ -142,4 +176,4 @@ servers:
 - url: http://{defaultHost}
   variables:
     defaultHost:
-      default: localhost:8000
+      default: www.localhost:8000
