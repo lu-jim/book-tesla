@@ -1,8 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe 'Users', type: :request do
-  let!(:users) { create_list(:user, 10) }
+  let!(:users) { create_list(:user, 5) }
   let(:user_id) { users.first.id }
+  let(:user) { users.first }
 
   # Test suite for GET /v1/users
   describe 'GET /v1/users' do
@@ -12,7 +13,7 @@ RSpec.describe 'Users', type: :request do
     it 'returns users' do
       # Note `json` is a custom helper to parse JSON responses
       expect(json).not_to be_empty
-      expect(json.size).to eq(10)
+      expect(json.size).to eq(5)
     end
 
     it 'returns status code 200' do
@@ -51,7 +52,7 @@ RSpec.describe 'Users', type: :request do
   # Test suite for POST /v1/users
   describe 'POST /v1/users' do
     # valid payload
-    let(:valid_attributes) { { username: 'Bezos' } }
+    let(:valid_attributes) { { username: 'Bezos', email: 'bezos1@inside.com', password: '213wed234d23' } }
 
     context 'when the request is valid' do
       before { post '/v1/users', params: valid_attributes }
@@ -66,7 +67,7 @@ RSpec.describe 'Users', type: :request do
     end
 
     context 'when the request is invalid' do
-      before { post '/v1/users', params: {} }
+      before { post '/v1/users', params: { username: 'Bezos' } }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -74,7 +75,7 @@ RSpec.describe 'Users', type: :request do
 
       it 'returns a validation failure message' do
         expect(response.body)
-          .to match(/Validation failed: Username can't be blank/)
+          .to match(/Validation failed: Email can't be blank, Password can't be blank/)
       end
     end
   end
