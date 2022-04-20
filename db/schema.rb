@@ -14,13 +14,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_13_171807) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "bookings", id: false, force: :cascade do |t|
-    t.bigint "car_id", null: false
-    t.bigint "user_id", null: false
+  create_table "bookings", force: :cascade do |t|
+    t.bigint "car_id"
+    t.bigint "user_id"
     t.string "location"
     t.datetime "date"
-    t.index ["car_id", "user_id"], name: "index_bookings_on_car_id_and_user_id"
-    t.index ["user_id", "car_id"], name: "index_bookings_on_user_id_and_car_id"
+    t.index ["car_id"], name: "index_bookings_on_car_id"
+    t.index ["user_id"], name: "index_bookings_on_user_id"
   end
 
   create_table "cars", force: :cascade do |t|
@@ -50,4 +50,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_13_171807) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "bookings", "cars"
+  add_foreign_key "bookings", "users"
 end
