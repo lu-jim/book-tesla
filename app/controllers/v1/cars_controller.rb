@@ -34,7 +34,7 @@ class V1::CarsController < ApplicationController
 
   def car_params
     # whitelist params
-    params.permit(:model, :city, :image_link)
+    params.permit(:model, :image_link)
   end
 
   def set_car
