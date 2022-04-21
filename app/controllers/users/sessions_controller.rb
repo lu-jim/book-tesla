@@ -1,15 +1,15 @@
 class Users::SessionsController < Devise::SessionsController
   respond_to :json
  
-  def new
-    @session = User.find(params[:email])
-    respond_with(@session.user_id)
-  end
+  # def create
+  #   @session = User.find(user_params)
+  #   json_response(@session.user_id)
+  # end
 
   private
 
   def respond_with(user_id, _resource, _opts = {})
-    render json: { message: 'You are logged in.', user_id: user_id }, status: :ok
+    render json: { message: 'You are logged in.', user_id: 1 }, status: :ok
   end
 
   def respond_to_on_destroy
