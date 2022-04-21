@@ -79,6 +79,11 @@ paths:
       required: true
       schema:
         type: string
+    get:
+      summary: show booking
+      responses:
+        '200':
+          description: successful
     patch:
       summary: update booking
       responses:
@@ -173,7 +178,7 @@ paths:
         '200':
           description: successful
 servers:
-- url: http://{defaultHost}
+- url: https://{defaultHost}
   variables:
     defaultHost:
-      default: www.localhost:8000
+      default: www.example.com
