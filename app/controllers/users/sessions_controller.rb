@@ -4,7 +4,7 @@ class Users::SessionsController < Devise::SessionsController
   private
 
   def respond_with(_resource, _opts = {})
-    render json: { message: 'You are logged in.' }, status: :ok
+    render json: { message: 'You are logged in.', user_id: 1 }, status: :ok
   end
 
   def respond_to_on_destroy
@@ -19,5 +19,11 @@ class Users::SessionsController < Devise::SessionsController
 
   def log_out_failure
     render json: { message: 'Hmm nothing happened.' }, status: :unauthorized
+  end
+
+  private
+
+  def get_user_id
+    @current_user: User.find(params[:email])
   end
 end
