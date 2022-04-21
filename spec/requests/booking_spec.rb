@@ -52,4 +52,29 @@ RSpec.describe 'Bookings', type: :request do
       end
     end
   end
+  # Test suite for PUT /bookings/:id
+  describe 'PUT /v1/bookings/:id' do
+    let(:valid_attributes) { { location: 'Ottawa' } }
+
+    context 'when the record exists' do
+      before { put "/v1/bookings/#{booking.id}", params: valid_attributes }
+
+      it 'updates the record' do
+        expect(response.body).to be_empty
+      end
+
+      it 'returns status code 204' do
+        expect(response).to have_http_status(204)
+      end
+    end
+  end
+
+  # Test suite for DELETE /bookings/:id
+  describe 'DELETE /v1/bookings/:id' do
+    before { delete "/v1/bookings/#{booking.id}" }
+
+    it 'returns status code 204' do
+      expect(response).to have_http_status(204)
+    end
+  end
 end

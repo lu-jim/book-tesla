@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   namespace :v1, defaults: { format: :json } do
     resources :cars
     resources :users
-    resources :bookings, only: %i[index update destroy create]
+    resources :bookings, only: %i[index show update destroy create]
   end
 
   get '/member-data', to: 'members#show'
