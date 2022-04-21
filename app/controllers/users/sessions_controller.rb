@@ -1,15 +1,12 @@
 class Users::SessionsController < Devise::SessionsController
   respond_to :json
- 
-  # def create
-  #   @session = User.find(user_params)
-  #   json_response(@session.user_id)
-  # end
 
   private
 
-  def respond_with(user_id, _resource, _opts = {})
-    render json: { message: 'You are logged in.', user_id: 1 }, status: :ok
+  def respond_with(_resource, _opts = {})
+    email = params[:email]
+    user = User.where(email: email)[0]
+    render json: { message: 'You are logged in.', user_id: user.id }, status: :ok
   end
 
   def respond_to_on_destroy
@@ -25,4 +22,5 @@ class Users::SessionsController < Devise::SessionsController
   def log_out_failure
     render json: { message: 'Hmm nothing happened.' }, status: :unauthorized
   end
+
 end
