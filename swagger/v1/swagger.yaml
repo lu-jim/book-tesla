@@ -1,8 +1,17 @@
 ---
 openapi: 3.0.1
 info:
-  title: API V1
+  title: Rent a Tesla API
   version: v1
+  description: Rent a Tesla API is organized around [REST](https://www.redhat.com/en/topics/api/what-is-a-rest-api). 
+    Our API has predictable resource-oriented URLs, accepts form-encoded request bodies, returns JSON-encoded responses, 
+    and uses standard HTTP response codes, authentication, and verbs.\ 
+
+    \ 
+
+    With this API, developers can interact with the database to 
+    **create**, **edit** or **delete** **users**, **cars**, and **bookings**.
+    
 paths:
   "/users/sign_in":
     post:
@@ -12,8 +21,7 @@ paths:
       parameters:
       - name: email
         in: query
-        description: Users can log in with their emails.\n Send an email as a parameter.\n
-          If a user match with that email, the response will retrieve a **success
+        description: Users can log in with their emails. Send an email as a parameter. If a user match with that email, the response will retrieve a **success
           message** and the **user id**. If the email doesn't match any user in the
           database, the response will retrieve an **error message**
         required: false
@@ -25,11 +33,34 @@ paths:
   "/v1/bookings":
     get:
       summary: list bookings
+      tags:
+      - Bookings
       responses:
         '200':
           description: successful
     post:
       summary: create booking
+      tags:
+      - Bookings
+      parameters:
+      - name: car_id
+        in: query
+        description: Add the id of a car
+        required: true
+        schema:
+          type: integer
+      - name: user_id
+        in: query
+        description: Add the id of an user
+        required: true
+        schema:
+          type: integer
+      - name: date
+        in: query
+        description: Add the date of booking
+        required: true
+        schema:
+          type: string
       responses:
         '200':
           description: successful
@@ -43,32 +74,89 @@ paths:
         type: string
     get:
       summary: show booking
+      tags:
+      - Bookings
       responses:
         '200':
           description: successful
     patch:
       summary: update booking
+      tags:
+      - Bookings
+      parameters:
+      - name: car_id
+        in: query
+        description: Add the id of a car
+        schema:
+          type: integer
+      - name: user_id
+        in: query
+        description: Add the id of an user
+        schema:
+          type: integer
+      - name: date
+        in: query
+        description: Add the date of booking
+        schema:
+          type: string
       responses:
         '200':
           description: successful
     put:
       summary: update booking
+      tags:
+      - Bookings
+      parameters:
+      - name: car_id
+        in: query
+        description: Add the id of a car
+        schema:
+          type: integer
+      - name: user_id
+        in: query
+        description: Add the id of an user
+        schema:
+          type: integer
+      - name: date
+        in: query
+        description: Add the date of booking
+        schema:
+          type: string
       responses:
         '200':
           description: successful
     delete:
       summary: delete booking
+      tags:
+      - Bookings
       responses:
         '200':
           description: successful
   "/v1/cars":
     get:
       summary: list cars
+      tags:
+      - Cars
       responses:
         '200':
           description: successful
     post:
       summary: create car
+      tags:
+      - Cars
+      parameters:
+      - name: model
+        in: query
+        description: Add the model of a car
+        required: true
+        schema:
+          type: string
+      - name: image_link
+        in: query
+        description: Add the link of an image
+        required: true
+        schema:
+          type: string
       responses:
         '200':
           description: successful
@@ -82,21 +170,51 @@ paths:
         type: string
     get:
       summary: show car
+      tags:
+      - Cars
       responses:
         '200':
           description: successful
     patch:
       summary: update car
+      tags:
+      - Cars
+      parameters:
+      - name: model
+        in: query
+        description: Add the model of a car
+        schema:
+          type: string
+      - name: image_link
+        in: query
+        description: Add the link of an image
+        schema:
+          type: string
       responses:
         '200':
           description: successful
     put:
       summary: update car
+      tags:
+      - Cars
+      parameters:
+      - name: model
+        in: query
+        description: Add the model of a car
+        schema:
+          type: string
+      - name: image_link
+        in: query
+        description: Add the link of an image
+        schema:
+          type: string
       responses:
         '200':
           description: successful
     delete:
       summary: delete car
+      tags:
+      - Cars
       responses:
         '200':
           description: successful
@@ -108,7 +226,7 @@ paths:
       parameters:
       - name: email
         in: query
-        description: Send an email as a parameter.\n If a user match with that email,
+        description: Send an email as a parameter. If a user match with that email,
           the response will retrieve a **success message** and the **user id**. If
           the email doesn't match any user in the database, the response will retrieve
           an **error message**
@@ -164,10 +282,25 @@ paths:
       tags:
       - Users
       parameters:
-      - name: email
+      - name: id
         in: path
-        description: Add a new email.
+        description: Change the email
         required: true
+        schema:
+          type: string
+      - name: email
+        in: query
+        description: Change the email
+        schema:
+          type: string
+      - name: username
+        in: query
+        description: Change the username
+        schema:
+          type: string
+      - name: password
+        in: query
+        description: Change a password
         schema:
           type: string
       responses:
@@ -177,6 +310,22 @@ paths:
       summary: Update user
       tags:
       - Users
+      parameters:
+      - name: email
+        in: query
+        description: Change the email
+        schema:
+          type: string
+      - name: username
+        in: query
+        description: Change the username
+        schema:
+          type: string
+      - name: password
+        in: query
+        description: Change a password
+        schema:
+          type: string
       responses:
         '200':
           description: successful
