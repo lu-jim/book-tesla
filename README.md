@@ -58,6 +58,10 @@ By default, the project will run in the port 8000.
 ### Testing
 - Run `rspec spec` to run the tests for this project
 
+### Project
+
+- Link to the [Kanban board](https://github.com/lu-jim/book-tesla/projects/1)
+
 ## Authors
 
 👤 **Luis Fernando Jimenez**
