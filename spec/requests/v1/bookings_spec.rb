@@ -1,6 +1,10 @@
 require 'swagger_helper'
 
 RSpec.describe 'v1/bookings', type: :request do
+  let!(:user) { create(:user) }
+  let!(:car) { create(:car) }
+  let!(:bookings) { create_list(:booking, 5, user_id: user.id, car_id: car.id) }
+  let(:booking) { bookings.first }
 
   path '/v1/bookings' do
 
@@ -46,7 +50,7 @@ RSpec.describe 'v1/bookings', type: :request do
     get('show booking') do
       tags 'Bookings'
       response(200, 'successful') do
-        let(:id) { '123' }
+        let(:id) { '1' }
 
         after do |example|
           example.metadata[:response][:content] = {
@@ -65,7 +69,7 @@ RSpec.describe 'v1/bookings', type: :request do
       parameter name: :user_id, in: :query, type: :integer, description: 'Add the id of an user'
       parameter name: :date, in: :query, type: :string, description: 'Add the date of booking'
       response(200, 'successful') do
-        let(:id) { '123' }
+        let(:id) { '1' }
 
         after do |example|
           example.metadata[:response][:content] = {
@@ -84,7 +88,7 @@ RSpec.describe 'v1/bookings', type: :request do
       parameter name: :user_id, in: :query, type: :integer, description: 'Add the id of an user'
       parameter name: :date, in: :query, type: :string, description: 'Add the date of booking'
       response(200, 'successful') do
-        let(:id) { '123' }
+        let(:id) { '1' }
 
         after do |example|
           example.metadata[:response][:content] = {
@@ -100,7 +104,7 @@ RSpec.describe 'v1/bookings', type: :request do
     delete('delete booking') do
       tags 'Bookings'
       response(200, 'successful') do
-        let(:id) { '123' }
+        let(:id) { '1' }
 
         after do |example|
           example.metadata[:response][:content] = {

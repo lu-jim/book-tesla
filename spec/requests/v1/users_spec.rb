@@ -1,7 +1,8 @@
 require 'swagger_helper'
 
 RSpec.describe 'v1/users', type: :request do
-
+  let(:valid_attributes) { { username: 'Bezos', email: 'bezos1@inside.com', password: '213wed234d23' } }
+  
   path '/v1/users' do
 
     get('list users') do
@@ -48,7 +49,7 @@ RSpec.describe 'v1/users', type: :request do
     get('show user') do
       tags 'Users'
       response(200, 'successful') do
-        let(:id) { '1' }
+        let(:id) { '123' }
 
         after do |example|
           example.metadata[:response][:content] = {
@@ -68,7 +69,7 @@ RSpec.describe 'v1/users', type: :request do
       parameter name: :username, in: :query, type: :string, description: 'Change the username'
       parameter name: :password, in: :query, type: :string, description: 'Change a password'
       response(200, 'successful') do
-        let(:id) { '1' }
+        let(:id) { '123' }
 
         after do |example|
           example.metadata[:response][:content] = {
@@ -87,7 +88,7 @@ RSpec.describe 'v1/users', type: :request do
       parameter name: :username, in: :query, type: :string, description: 'Change the username'
       parameter name: :password, in: :query, type: :string, description: 'Change a password'
       response(200, 'successful') do
-        let(:id) { '1' }
+        let(:id) { '123' }
 
         after do |example|
           example.metadata[:response][:content] = {
@@ -103,7 +104,7 @@ RSpec.describe 'v1/users', type: :request do
     delete('delete user') do
       tags 'Users'
       response(200, 'successful') do
-        let(:id) { '1' }
+        let(:id) { '123' }
 
         after do |example|
           example.metadata[:response][:content] = {

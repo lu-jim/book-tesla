@@ -5,7 +5,7 @@ class Users::SessionsController < Devise::SessionsController
 
   def respond_with(_resource, _opts = {})
     email = params[:email]
-    response = User.where(email: email)[0] || 'Email doesn\'t exist'
+    response = User.where(email:)[0] || 'Email doesn\'t exist'
     if response.is_a? String then render json: { message: response }, status: :ok
     else
       render json: { message: 'You are logged in.', user_id: response.id }, status: :ok
@@ -25,5 +25,4 @@ class Users::SessionsController < Devise::SessionsController
   def log_out_failure
     render json: { message: 'Hmm nothing happened.' }, status: :unauthorized
   end
-
 end

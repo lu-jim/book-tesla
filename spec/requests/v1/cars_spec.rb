@@ -1,6 +1,9 @@
 require 'swagger_helper'
 
 RSpec.describe 'v1/cars', type: :request do
+  let!(:cars) { create_list(:car, 10) }
+  let(:car_id) { cars.first.id }
+  
   path '/v1/cars' do
     get('list cars') do
       tags 'Cars'
