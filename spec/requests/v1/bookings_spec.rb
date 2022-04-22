@@ -5,6 +5,7 @@ RSpec.describe 'v1/bookings', type: :request do
   path '/v1/bookings' do
 
     get('list bookings') do
+      tags 'Bookings'
       response(200, 'successful') do
 
         after do |example|
@@ -19,6 +20,7 @@ RSpec.describe 'v1/bookings', type: :request do
     end
 
     post('create booking') do
+      tags 'Bookings'
       response(200, 'successful') do
 
         after do |example|
@@ -38,6 +40,7 @@ RSpec.describe 'v1/bookings', type: :request do
     parameter name: 'id', in: :path, type: :string, description: 'id'
 
     get('show booking') do
+      tags 'Bookings'
       response(200, 'successful') do
         let(:id) { '123' }
 
@@ -53,6 +56,7 @@ RSpec.describe 'v1/bookings', type: :request do
     end
 
     patch('update booking') do
+      tags 'Bookings'
       response(200, 'successful') do
         let(:id) { '123' }
 
@@ -68,6 +72,7 @@ RSpec.describe 'v1/bookings', type: :request do
     end
 
     put('update booking') do
+      tags 'Bookings'
       response(200, 'successful') do
         let(:id) { '123' }
 
@@ -83,6 +88,7 @@ RSpec.describe 'v1/bookings', type: :request do
     end
 
     delete('delete booking') do
+      tags 'Bookings'
       response(200, 'successful') do
         let(:id) { '123' }
 

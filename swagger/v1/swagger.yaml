@@ -4,59 +4,21 @@ info:
   title: API V1
   version: v1
 paths:
-  "/users/cancel":
-    get:
-      summary: cancel registration
-      responses:
-        '200':
-          description: successful
-  "/users/sign_up":
-    get:
-      summary: new registration
-      responses:
-        '200':
-          description: successful
-  "/users/edit":
-    get:
-      summary: edit registration
-      responses:
-        '200':
-          description: successful
-  "/users":
-    patch:
-      summary: update registration
-      responses:
-        '200':
-          description: successful
-    put:
-      summary: update registration
-      responses:
-        '200':
-          description: successful
-    delete:
-      summary: delete registration
-      responses:
-        '200':
-          description: successful
-    post:
-      summary: create registration
-      responses:
-        '200':
-          description: successful
   "/users/sign_in":
-    get:
-      summary: new session
-      responses:
-        '200':
-          description: successful
     post:
-      summary: create session
-      responses:
-        '200':
-          description: successful
-  "/users/sign_out":
-    delete:
-      summary: delete session
+      summary: Create a new session
+      tags:
+      - How to login
+      parameters:
+      - name: email
+        in: query
+        description: Users can log in with their emails.\n Send an email as a parameter.\n
+          If a user match with that email, the response will retrieve a **success
+          message** and the **user id**. If the email doesn't match any user in the
+          database, the response will retrieve an **error message**
+        required: false
+        schema:
+          type: string
       responses:
         '200':
           description: successful
@@ -141,11 +103,44 @@ paths:
   "/v1/users":
     get:
       summary: list users
+      tags:
+      - Users
+      parameters:
+      - name: email
+        in: query
+        description: Send an email as a parameter.\n If a user match with that email,
+          the response will retrieve a **success message** and the **user id**. If
+          the email doesn't match any user in the database, the response will retrieve
+          an **error message**
+        required: true
+        schema:
+          type: string
       responses:
         '200':
           description: successful
     post:
-      summary: create user
+      summary: Create an user
+      tags:
+      - Users
+      parameters:
+      - name: email
+        in: query
+        description: Add an email
+        required: true
+        schema:
+          type: string
+      - name: username
+        in: query
+        description: Add a username
+        required: true
+        schema:
+          type: string
+      - name: password
+        in: query
+        description: Add a password
+        required: true
+        schema:
+          type: string
       responses:
         '200':
           description: successful
@@ -153,32 +148,47 @@ paths:
     parameters:
     - name: id
       in: path
-      description: id
+      description: Add a valid id.
       required: true
       schema:
         type: string
     get:
       summary: show user
+      tags:
+      - Users
       responses:
         '200':
           description: successful
     patch:
-      summary: update user
+      summary: Update user
+      tags:
+      - Users
+      parameters:
+      - name: email
+        in: path
+        description: Add a new email.
+        required: true
+        schema:
+          type: string
       responses:
         '200':
           description: successful
     put:
-      summary: update user
+      summary: Update user
+      tags:
+      - Users
       responses:
         '200':
           description: successful
     delete:
       summary: delete user
+      tags:
+      - Users
       responses:
         '200':
           description: successful
 servers:
-- url: http://{defaultHost}
+- url: https://{defaultHost}
   variables:
     defaultHost:
-      default: localhost:8000
+      default: www.example.com

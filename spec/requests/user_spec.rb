@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'swagger_helper'
 
 RSpec.describe 'Users', type: :request do
   let!(:users) { create_list(:user, 5) }
@@ -10,7 +11,7 @@ RSpec.describe 'Users', type: :request do
     # make HTTP get request before each example
     before { get '/v1/users' }
 
-    it 'returns users' do
+    it 'Returns an array of users' do
       # Note `json` is a custom helper to parse JSON responses
       expect(json).not_to be_empty
       expect(json.size).to eq(5)
@@ -25,7 +26,7 @@ RSpec.describe 'Users', type: :request do
   describe 'GET /v1/users/:id' do
     before { get "/v1/users/#{user_id}" }
 
-    context 'when the record exists' do
+    context 'When the record exists' do
       it 'returns the user' do
         expect(json).not_to be_empty
         expect(json['id']).to eq(user_id)
@@ -53,6 +54,7 @@ RSpec.describe 'Users', type: :request do
   describe 'POST /v1/users' do
     # valid payload
     let(:valid_attributes) { { username: 'Bezos', email: 'bezos1@inside.com', password: '213wed234d23' } }
+
 
     context 'when the request is valid' do
       before { post '/v1/users', params: valid_attributes }
