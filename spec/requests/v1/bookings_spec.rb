@@ -21,6 +21,10 @@ RSpec.describe 'v1/bookings', type: :request do
 
     post('create booking') do
       tags 'Bookings'
+      parameter name: :car_id, in: :query, type: :integer, description: 'Add the id of a car', required: true
+      parameter name: :user_id, in: :query, type: :integer, description: 'Add the id of an user', required: true
+      parameter name: :date, in: :query, type: :string, description: 'Add the date of booking', required: true
+
       response(200, 'successful') do
 
         after do |example|
@@ -57,6 +61,9 @@ RSpec.describe 'v1/bookings', type: :request do
 
     patch('update booking') do
       tags 'Bookings'
+      parameter name: :car_id, in: :query, type: :integer, description: 'Add the id of a car'
+      parameter name: :user_id, in: :query, type: :integer, description: 'Add the id of an user'
+      parameter name: :date, in: :query, type: :string, description: 'Add the date of booking'
       response(200, 'successful') do
         let(:id) { '123' }
 
@@ -73,6 +80,9 @@ RSpec.describe 'v1/bookings', type: :request do
 
     put('update booking') do
       tags 'Bookings'
+      parameter name: :car_id, in: :query, type: :integer, description: 'Add the id of a car'
+      parameter name: :user_id, in: :query, type: :integer, description: 'Add the id of an user'
+      parameter name: :date, in: :query, type: :string, description: 'Add the date of booking'
       response(200, 'successful') do
         let(:id) { '123' }
 
