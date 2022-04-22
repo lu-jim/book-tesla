@@ -1,10 +1,15 @@
 require 'swagger_helper'
 
 RSpec.describe 'v1/bookings', type: :request do
+  let!(:user) { create(:user) }
+  let!(:car) { create(:car) }
+  let!(:bookings) { create_list(:booking, 5, user_id: user.id, car_id: car.id) }
+  let(:booking) { bookings.first }
 
   path '/v1/bookings' do
 
     get('list bookings') do
+      tags 'Bookings'
       response(200, 'successful') do
 
         after do |example|
@@ -19,6 +24,11 @@ RSpec.describe 'v1/bookings', type: :request do
     end
 
     post('create booking') do
+      tags 'Bookings'
+      parameter name: :car_id, in: :query, type: :integer, description: 'Add the id of a car', required: true
+      parameter name: :user_id, in: :query, type: :integer, description: 'Add the id of an user', required: true
+      parameter name: :date, in: :query, type: :string, description: 'Add the date of booking', required: true
+
       response(200, 'successful') do
 
         after do |example|
@@ -38,8 +48,9 @@ RSpec.describe 'v1/bookings', type: :request do
     parameter name: 'id', in: :path, type: :string, description: 'id'
 
     get('show booking') do
+      tags 'Bookings'
       response(200, 'successful') do
-        let(:id) { '123' }
+        let(:id) { '1' }
 
         after do |example|
           example.metadata[:response][:content] = {
@@ -53,8 +64,12 @@ RSpec.describe 'v1/bookings', type: :request do
     end
 
     patch('update booking') do
+      tags 'Bookings'
+      parameter name: :car_id, in: :query, type: :integer, description: 'Add the id of a car'
+      parameter name: :user_id, in: :query, type: :integer, description: 'Add the id of an user'
+      parameter name: :date, in: :query, type: :string, description: 'Add the date of booking'
       response(200, 'successful') do
-        let(:id) { '123' }
+        let(:id) { '1' }
 
         after do |example|
           example.metadata[:response][:content] = {
@@ -68,8 +83,12 @@ RSpec.describe 'v1/bookings', type: :request do
     end
 
     put('update booking') do
+      tags 'Bookings'
+      parameter name: :car_id, in: :query, type: :integer, description: 'Add the id of a car'
+      parameter name: :user_id, in: :query, type: :integer, description: 'Add the id of an user'
+      parameter name: :date, in: :query, type: :string, description: 'Add the date of booking'
       response(200, 'successful') do
-        let(:id) { '123' }
+        let(:id) { '1' }
 
         after do |example|
           example.metadata[:response][:content] = {
@@ -83,8 +102,9 @@ RSpec.describe 'v1/bookings', type: :request do
     end
 
     delete('delete booking') do
+      tags 'Bookings'
       response(200, 'successful') do
-        let(:id) { '123' }
+        let(:id) { '1' }
 
         after do |example|
           example.metadata[:response][:content] = {

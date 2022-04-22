@@ -4,7 +4,12 @@ class Users::SessionsController < Devise::SessionsController
   private
 
   def respond_with(_resource, _opts = {})
-    render json: { message: 'You are logged in.' }, status: :ok
+    email = params[:email]
+    response = User.where(email:)[0] || 'Email doesn\'t exist'
+    if response.is_a? String then render json: { message: response }, status: :ok
+    else
+      render json: { message: 'You are logged in.', user_id: response.id }, status: :ok
+    end
   end
 
   def respond_to_on_destroy

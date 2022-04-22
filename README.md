@@ -1,46 +1,40 @@
 # Book-Tesla
 ![](https://img.shields.io/badge/Microverse-blueviolet) ![](https://img.shields.io/badge/Ruby-red) ![](https://img.shields.io/badge/Rails-critical)
-> API built with Rails where your users can create bookings for a given car:
+>API built with Rails where your users can create bookings for a given car:
+## About
 
-# API Endpoints
+Book-a-Tesla is a Rails only API project where your users can create bookings for a given car. With the endpoints, developers can integrate the front-end of their web-app to create users, cars and bookings.
 
-http://localhost:8000/users/sign_in
+Front-end of Book-a-Tesla can be found [here](https://github.com/Maclenn77/book-tesla-frontend/).
 
-    Route ==> Sign in
-    Method ==> POST
-    Body ==> { "user": { "email": "test@example.com", "password": "12345678" } }
-    Response token ==> data.headers.authorization
+## Description
 
-http://localhost:8000/users
+Rent a Tesla API is organized around REST. Our API has predictable resource-oriented URLs, accepts form-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP response codes, authentication, and verbs.
 
-    Route ==> Sign up
-    Method ==> POST
-    Body ==> { "user": { "email": "test@example.com", "password": "12345678" } }
-    Response token ==> data.headers.authorization
+With this API, developers can interact with the database to create, edit or delete users, cars, and bookings.
 
-http://localhost:8000/member
+Check complete documentation with 
 
-    Route ==> To know if user logged in?
-    Method ==> GET
-    headers ==> token: token you saved from log in or sign up user
-    Response ==> data.data.message=> 'yeppa you did it.'
+`rails s`
 
-http://localhost:8000/users/sign_out
-
-    Route ==> To know if user logged in?
-    Method ==> DELETE
-    headers ==> token: token you saved from log in or sign up user
-    Response ==> data.data.message=> 'You are logged out.'
-
+And then, open the API docs in the [local server](http://localhost:8000).
 
 ## Built With
+
 - Ruby
 - Rails
+- Rswag
+- Rspec
+- VS Code
 
 ## Getting Started
 To get a local copy up and running follow these simple steps.
+
 ### Prerequisites
 - Having a modern internet browser: I.E. Chrome, Edge, Safari, Firefox.
+- Being able to run a local server and rails commands
+- Bundle
+
 ### Setup
 - Go into the main page for this project: https://github.com/lu-jim/book-tesla
 - Click the green Code button next to the About section.
@@ -57,13 +51,20 @@ rails db:create # create database
 rails db:migrate # migrate tables
 rails db:seed # load dummy database from seed.rb
 
-rails s -p 8000 # run the api
+rails s # run the api
 ```
-
+By default, the project will run in the port 8000.
 
 ### Testing
 - Run `rspec spec` to run the tests for this project
+
 ## Authors
+
+👤 **Luis Fernando Jimenez**
+
+- GitHub: [@lu-jim](https://github.com/lu-jim)
+- Twitter: [@lujimhe](https://twitter.com/lujimhe)
+- LinkedIn: [@lujim](https://www.linkedin.com/in/lujim/)
 
 👤 **Juan Paulo Pérez-Tejada**
 
@@ -77,19 +78,16 @@ rails s -p 8000 # run the api
 - Twitter: [@MoazMulki1](https://twitter.com/MoazMulki1)
 - LinkedIn: [@mouaz-molki](https://www.linkedin.com/in/mouaz-molki/)
 
-👤 **Luis Fernando Jimenez**
-
-- GitHub: [@lu-jim](https://github.com/lu-jim)
-- Twitter: [@lujimhe](https://twitter.com/lujimhe)
-- LinkedIn: [@lujim](https://www.linkedin.com/in/lujim/)
-
 ## 🤝 Contributing
 
 Contributions, issues, and feature requests are welcome!
 
+[Open an issue here](https://github.com/lu-jim/book-tesla/issues/new).
+
 ## Show your support
 
 Give a ⭐️ if you like this project!
+
 ## Acknowledgments
 
 - Microverse for the guidelines used for this project

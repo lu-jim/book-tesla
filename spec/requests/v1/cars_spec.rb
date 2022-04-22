@@ -1,8 +1,12 @@
 require 'swagger_helper'
 
 RSpec.describe 'v1/cars', type: :request do
+  let!(:cars) { create_list(:car, 10) }
+  let(:car_id) { cars.first.id }
+  
   path '/v1/cars' do
     get('list cars') do
+      tags 'Cars'
       response(200, 'successful') do
         after do |example|
           example.metadata[:response][:content] = {
@@ -16,6 +20,9 @@ RSpec.describe 'v1/cars', type: :request do
     end
 
     post('create car') do
+      tags 'Cars'
+      parameter name: :model, in: :query, type: :string, description: 'Add the model of a car', required: true
+      parameter name: :image_link, in: :query, type: :string, description: 'Add the link of an image', required: true
       response(200, 'successful') do
         after do |example|
           example.metadata[:response][:content] = {
@@ -34,6 +41,7 @@ RSpec.describe 'v1/cars', type: :request do
     parameter name: 'id', in: :path, type: :string, description: 'id'
 
     get('show car') do
+      tags 'Cars'
       response(200, 'successful') do
         let(:id) { '123' }
 
@@ -49,6 +57,9 @@ RSpec.describe 'v1/cars', type: :request do
     end
 
     patch('update car') do
+      tags 'Cars'
+      parameter name: :model, in: :query, type: :string, description: 'Add the model of a car'
+      parameter name: :image_link, in: :query, type: :string, description: 'Add the link of an image'
       response(200, 'successful') do
         let(:id) { '123' }
 
@@ -64,6 +75,9 @@ RSpec.describe 'v1/cars', type: :request do
     end
 
     put('update car') do
+      tags 'Cars'
+      parameter name: :model, in: :query, type: :string, description: 'Add the model of a car'
+      parameter name: :image_link, in: :query, type: :string, description: 'Add the link of an image'
       response(200, 'successful') do
         let(:id) { '123' }
 
@@ -79,6 +93,7 @@ RSpec.describe 'v1/cars', type: :request do
     end
 
     delete('delete car') do
+      tags 'Cars'
       response(200, 'successful') do
         let(:id) { '123' }
 
