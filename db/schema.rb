@@ -18,7 +18,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_13_171807) do
     t.bigint "car_id"
     t.bigint "user_id"
     t.string "location"
-
     t.datetime "date"
     t.index ["car_id"], name: "index_bookings_on_car_id"
     t.index ["user_id"], name: "index_bookings_on_user_id"
@@ -26,7 +25,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_13_171807) do
 
   create_table "cars", force: :cascade do |t|
     t.string "model"
-    t.string "city"
     t.text "image_link"
     t.boolean "deleted", default: false
     t.datetime "created_at", null: false
